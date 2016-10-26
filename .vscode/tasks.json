@@ -1,0 +1,29 @@
+{
+    "version": "0.1.0",
+    "command": "dotnet",
+    "isShellCommand": true,
+    "args": [],
+    "tasks": [
+        {
+            "taskName": "run",
+            "args": [
+                "${workspaceRoot}/src/intro-to-ioc/project.json"
+            ]
+        },
+        {
+            "taskName": "build",
+            "args": [
+                "${workspaceRoot}/src/intro-to-ioc/project.json"
+            ],
+            "isBuildCommand": true,
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "taskName": "test",
+            "args": [
+                "${workspaceRoot}/test/intro-to-ioc.test/project.json"
+            ],
+            "isTestCommand": true
+        }
+    ]
+}
