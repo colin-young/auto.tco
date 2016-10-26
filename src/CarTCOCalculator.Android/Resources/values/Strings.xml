@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="add_car">Add a Car</string>
+	<string name="app_name">CarTCOCalculator</string>
+</resources>
