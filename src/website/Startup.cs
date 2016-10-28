@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -47,7 +48,9 @@ namespace website
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
-            services.AddMvc();
+            services.AddMvc(options =>
+            {
+            });
 
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
@@ -75,7 +78,36 @@ namespace website
 
             app.UseIdentity();
 
+            app.UseCookieAuthentication(new CookieAuthenticationOptions
+            {
+                AutomaticAuthenticate = true,
+                AutomaticChallenge = true,
+                LoginPath = new PathString("/login")
+            });
+
             // Add external authentication middleware below. To configure them please see https://go.microsoft.com/fwlink/?LinkID=532715
+            var log = loggerFactory.CreateLogger("StartUp");
+
+            log.LogInformation($"Authentication:Facebook:AppId: {Configuration["Authentication:Facebook:AppId"]}");
+            log.LogInformation($"Authentication:Facebook:AppSecret: {Configuration["Authentication:Facebook:AppSecret"]}");
+
+            app.UseFacebookAuthentication(new FacebookOptions()
+            {
+                AppId = Configuration["Authentication:Facebook:AppId"],
+                AppSecret = Configuration["Authentication:Facebook:AppSecret"],
+                Scope = { "email" },
+                Fields = { "name", "email" },
+                SaveTokens = true
+            });
+
+            log.LogInformation($"Authentication:Google:ClientId: {Configuration["Authentication:Google:ClientId"]}");
+            log.LogInformation($"Authentication:Google:ClientSecret: {Configuration["Authentication:Google:ClientSecret"]}");
+
+            app.UseGoogleAuthentication(new GoogleOptions()
+            {
+                ClientId = Configuration["Authentication:Google:ClientId"],
+                ClientSecret = Configuration["Authentication:Google:ClientSecret"]
+            });
 
             app.UseMvc(routes =>
             {
