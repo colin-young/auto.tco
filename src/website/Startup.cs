@@ -62,6 +62,7 @@ namespace website
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
+            loggerFactory.AddFile("Logs/car-tco-calculator-{Date}.txt");
 
             if (env.IsDevelopment())
             {
@@ -106,7 +107,8 @@ namespace website
             app.UseGoogleAuthentication(new GoogleOptions()
             {
                 ClientId = Configuration["Authentication:Google:ClientId"],
-                ClientSecret = Configuration["Authentication:Google:ClientSecret"]
+                ClientSecret = Configuration["Authentication:Google:ClientSecret"],
+                Scope = { "https://www.googleapis.com/auth/userinfo.profile" }
             });
 
             app.UseMvc(routes =>

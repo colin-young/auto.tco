@@ -46,7 +46,10 @@
     "Microsoft.VisualStudio.Web.CodeGenerators.Mvc": {
       "version": "1.0.0-preview2-final",
       "type": "build"
-    }
+    },
+    "Serilog": "2.3.0",
+    "Serilog.Sinks.File": "3.1.0",
+    "Serilog.Extensions.Logging.File": "1.0.0"
   },
 
   "tools": {

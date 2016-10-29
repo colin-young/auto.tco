@@ -1,0 +1,28 @@
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <div style="width: 100%">
+        <div id="owl-example" class="owl-carousel">
+        <div class="col-md-3">
+            <img src="assets/img/astrif-featured-slider-01.jpg" alt="featured slider 01">
+            <div class="item-caption">
+                <div class="caption-description">
+                    <a href="category.html" class="caption-cat-links">Car 1</a>
+                    <span class="caption-title">
+                    <a href="single.html" class="caption-title-link">Total: $31,242 - $434/month</a>
+                    <a href="single.html" class="button caption-more-link">Read More</a>
+                    </span><!-- .caption-title -->
+                </div><!-- .caption-description -->
+            </div><!-- .item-caption -->        
+        </div>
+        <div class="col-md-3"> 2 </div>
+        <div class="col-md-3"> 3 </div>
+        <div class="col-md-3"> 4 </div>
+        <div class="col-md-3"> 5 </div>
+        <div class="col-md-3"> 6 </div>
+        <div class="col-md-3"> 7 </div>
+        </div>
+    </div>
+}
