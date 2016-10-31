@@ -27,7 +27,7 @@
 
     @if (SignInManager.IsSignedIn(User))
     {
-        @await Html.PartialAsync("_HeaderCarousel")
+        @RenderSection("TopbarSlider", required: false)
         @await Html.PartialAsync("_LoginPartial")
     }
     else

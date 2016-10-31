@@ -16,12 +16,16 @@
 @section scripts {
     <script type="text/javascript">
         $(document).ready(function () {
-            $("#owl-example").owlCarousel({
-                items: 4,
+            $("#slider-thumbnail").owlCarousel({
+                items: 3,
                 autoPlay : true,
                 stopOnHover : false,
                 navigation : true
             });
         });
     </script>
+}
+
+@section TopbarSlider {
+    @await Html.PartialAsync("_HeaderCarousel")
 }
