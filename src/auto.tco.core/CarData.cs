@@ -1,31 +1,33 @@
-using System;
+using System.Collections.Generic;
+using Auto.Tco.Core.Interfaces;
 
 namespace SharedLibrary
 {
     public class CarData
     {
-        readonly IBasicData _basicData;
+        IList<ITirePrice> _tirePrices = new List<ITirePrice>();
 
-        public CarData(IBasicData basicData)
-        {
-            _basicData = basicData;
-        }
+        public CarData() { }
+
+        public double AnnualInsurance { get; set; }
 
         public int CurrentMileage { get; set; }
+
+        public string Manufacturer { get; set; }
+
+        public string Model { get; set; }
+
+        public int ModelYear { get; set; }
+
         public double PurchasePrice { get; set; }
 
-        // calculated properties
-        public int EndOfLifeMileage => CurrentMileage + (_basicData.AnnualMileage * _basicData.LengthOfOwnership);
-        public double FinancedAmount => PurchasePrice - _basicData.Downpayment;
-        public double MonthlyPayment
-        {
-            get
-            {
-                var periodRate = _basicData.AnnualFinanceRate / 12.0f;
-                var denominator = Math.Pow(1 + periodRate, _basicData.NumberOfPayments);
+        public string SubModel { get; set; }
 
-                return (FinancedAmount * periodRate) / (1 - 1 / denominator);
-            }
-        }
+        public ITireData TireType { get; set; }
+
+        public IList<ITirePrice> TirePrices => _tirePrices;
+
+        // in vol/100 distance
+        public double FuelEconomy { get; set; }
     }
 }
